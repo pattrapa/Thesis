@@ -56,7 +56,10 @@ class _GestureControlPageState extends State<GestureControlPage> {
         return;
       }
 
-      final selectedCamera = cameras.first;
+      final selectedCamera = cameras.firstWhere(
+        (camera) => camera.lensDirection == CameraLensDirection.front,
+        orElse: () => cameras.first,
+      );
 
       cameraController = CameraController(
         selectedCamera,
